@@ -1,0 +1,35 @@
+{% extends 'blog/base.html' %}
+
+{% block content %}
+	<div class="title_content">
+		<p class="p_content">POLITICS</p>
+		<h2 class="text3">{{ post.title }}</h2>
+		<h2 class="h2_text_content">{{ post.text }}</h2>
+	</div>
+	<div class="mt-4 p-6">
+		<h3>comments</h3>
+
+		<form method="post" action=".">
+			{% csrf_token %}
+
+			<div class="content_content">
+				<label class="class_name">Name</label>
+				<input class="name_content" type="text" name="name">
+			</div>
+			<div>
+				<label class="class_commnet">Comment</label><br>
+				<textarea class="comment_content" name="comment"></textarea>
+			</div>
+			<div>
+				<button class="button_content">submit</button>
+			</div>
+		</form>
+		{% for comment in post.comments.all %}
+		<div class="comment_class_content">
+			<strong>{{ comment.name }}</strong>
+
+			<p class="class_p_content">{{ comment.comment }}</p>
+		</div>
+		{% endfor %}
+	</div>
+{% endblock %}
